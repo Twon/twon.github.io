@@ -1,3 +1,4 @@
-name: Antony Peacock's Blog
+title: Antony Peacock's Blog
+theme: jekyll-theme-modernist
 markdown: kramdown
 permalink: /blog/:year/:month/:day/:title
