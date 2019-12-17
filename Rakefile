@@ -1,4 +1,3 @@
-Learn more or give us feedback
 #############################################################################
 #
 # Modified version of jekyllrb Rakefile
