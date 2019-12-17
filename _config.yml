@@ -17,15 +17,17 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-
-title: Antony Peacock's Blog
-email: ant.peacock@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
+locale                  : "en"
+title                   : Antony Peacock's Blog
+name                    : "Antony Peacock"
+email                   : ant.peacock@gmail.com
+description             : >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://twon.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url                      : "https://twon.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl                  : "" # the subpath of your site, e.g. /blog
+repository               : "twon/twon.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 twitter_username: AntPeacock
 github_username:  twon
 timezone: Europe/London
@@ -104,6 +106,7 @@ search: true # enable site wide search.
 #   - vendor/ruby/
 
 
+# Settings for builing master branch with travis-ci with jekyll-travis
 # Settings for deploy rake task. Username and repo of Github repo, e.g. https://github.com/USERNAME/REPO.git
 # username defaults to ENV['GIT_NAME'] used by Travis, repo defaults to USERNAME.github.io
 # Branch defaults to "source" for USERNAME.github.io or "master" otherwise
