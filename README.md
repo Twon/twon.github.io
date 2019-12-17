@@ -8,7 +8,7 @@
 [badge.license]: https://img.shields.io/badge/license-MIT-blue.svg
 [badge.issues]: https://img.shields.io/github/issues/twon/twon.github.io.svg
 
-[travis]: https://travis-ci.org/twon/twon.github.io
+[travis]: https://travis-ci.com/twon/twon.github.io
 [language]: https://en.wikipedia.org/wiki/Ruby
 [license]: https://en.wikipedia.org/wiki/MIT_License
 [issues]: http://github.com/twon/twon.github.io/issues
