@@ -1,20 +1,36 @@
----
----
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    {% for post in site.posts %}
+    
     <url>
-        <loc>https://twon.github.io{{ post.url | remove: 'index.html' }}</loc>
+        <loc>https://twon.github.io/blog/2019/12/12/first-blog-post</loc>
     </url>
-    {% endfor %}
+    
+    <url>
+        <loc>https://twon.github.io/blog/2018/07/19/alignment-in-c++</loc>
+    </url>
+    
 
-    {% for page in site.pages %}
-    {% if page.layout != nil %}
-    {% if page.layout != 'feed' %}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <url>
-        <loc>https://twon.github.io{{ page.url | remove: 'index.html' }}</loc>
+        <loc>https://twon.github.io/</loc>
     </url>
-    {% endif %}
-    {% endif %}
-    {% endfor %}
+    
+    
+    
+    
+    
+    
+    
 </urlset>
