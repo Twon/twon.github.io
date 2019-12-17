@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem "minimal-mistakes-jekyll"
 gem 'jekyll-include-cache'
-
+gem 'rake' # for github deployment
 gem "github-pages", group: :jekyll_plugins
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
