@@ -102,3 +102,13 @@ search: true # enable site wide search.
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+
+# Settings for deploy rake task. Username and repo of Github repo, e.g. https://github.com/USERNAME/REPO.git
+# username defaults to ENV['GIT_NAME'] used by Travis, repo defaults to USERNAME.github.io
+# Branch defaults to "source" for USERNAME.github.io or "master" otherwise
+username: 4brunu
+repo: 4brunu.github.io
+source_branch: source
+destination_brach: master
+destination: ../gh-pages/
