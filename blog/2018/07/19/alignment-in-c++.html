@@ -99,7 +99,7 @@
 
   </head>
 
-  <body class="layout--default">
+  <body class="layout--single wide">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -145,7 +145,183 @@
 
 
     <div class="initial-content">
-      <h1 id="what-is-alignment-and-why-should-i-care">What is alignment and why should I care?</h1>
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/bio-photo.jpg" alt="Antony Peacock" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Antony Peacock</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Musing on software development, focused primarily on high performance computing and C++</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">London, UK</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="mailto:ant.peacock@gmail.com" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email</a></li>
+          
+        
+          
+            <li><a href="https://stackoverflow.com/users/4764531/antony-peacock" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-stack-overflow" aria-hidden="true"></i> Stack Overflow</a></li>
+          
+        
+          
+            <li><a href="https://twitter.com/antpeacock" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+          
+        
+          
+            <li><a href="https://github.com/twon" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+            <li><a href="https://instagram.com/twonington" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Alignment In C++">
+    <meta itemprop="description" content="What is alignment and why should I care?">
+    <meta itemprop="datePublished" content="July 19, 2018">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Alignment In C++
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  18 minute read
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#what-is-alignment-and-why-should-i-care">What is alignment and why should I care?</a>
+    <ul>
+      <li><a href="#c-03">C++ 03</a></li>
+      <li><a href="#alignment-requirements-for-vectorisation">Alignment requirements for vectorisation</a></li>
+      <li><a href="#alignment-of-dynamically-allocated-memory">Alignment of dynamically allocated memory</a></li>
+      <li><a href="#c-11">C++ 11</a></li>
+      <li><a href="#c-17">C++ 17</a></li>
+      <li><a href="#alignment-a-solved-problem">Alignment A Solved Problem?</a></li>
+      <li><a href="#conclusions">Conclusions</a></li>
+      <li><a href="#references">References</a></li>
+    </ul>
+  </li>
+</ul>
+            </nav>
+          </aside>
+        
+        <h1 id="what-is-alignment-and-why-should-i-care">What is alignment and why should I care?</h1>
 
 <p>Every type in C++ has the property called alignment requirement, which specifies the number of bytes between successive addresses at which objects of this type can be allocated. For instance, if you create a double on either the stack or the heap, it is guaranteed to be aligned to at least the size of a double (a double is 8-bytes so will always be aligned to an 8-byte boundary). The reason for this relates to restrictions placed on alignment by the underlying hardware architecture when handling and accessing data. Certain architectures such as ARM or MIPS will generate a hardware level exception when accessing data which is not aligned with alignment boundaries of at least a type’s size. Whereas other architecture such as PowerPC may generate multiple loads for unaligned data which is less efficient than the single load required to load data which is optimally aligned. To ensure consistency across the language C++ make certain guarantees about alignment. This article will examine what these guarantees are, how they have changed with the evolution of the language and what the implications of these are.</p>
 
@@ -179,6 +355,7 @@
     <span class="kt">float</span> <span class="n">pad_f</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="c1">// Compiler generated padding</span>
 <span class="p">};</span>
 </code></pre></div></div>
+
 <p>This example makes visible what is going on behind the scenes of a compiler to ensure alignment requirements are met. Because a 64-bit integer must be aligned to 8 bytes the compiler has to insert 7 bytes of padding after data member a and b. Similar padding is needed elsewhere to meet the specific alignment requirements of each data member. One point of interest in the insertion of pad_f by the compiler, while this might initially not appear to be needed for single instances of the class it becomes apparent that this must be inserted in order for the compiler to ensure that for an array of type Y, each instance of the Y struct is correctly aligned to meet the requirements of its internal data members. In particular without pad_f then data member b in the second element of an array would be 4 byte aligned, not 8-byte aligned. Of course, it’s possible to ensure this padding is not necessary and that the resulting data structure is 24-bytes in length, however, to do so we must take care to manually align each data member as such:</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">Z</span>
@@ -230,43 +407,45 @@
   <li>The number must be a positive integer that is a power of two.</li>
   <li>The number must be less than or equal to 128.</li>
   <li>The number must be known at compile time.
-The last requirement, in particular, can create some difficulties when trying to use alignment with Visual Studio versions prior to 2017 update 5, which did not correctly implement the 2 phase template lookup required by the C++ standard when parsing template class. If we templatise a class on an alignment value, we create a situation where the compiler requires knowledge of a dependent type, the template alignment parameter, but does not yet have knowledge of this type. This unsurprisingly results in a compilation error:
-    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="nc">__declspec</span><span class="p">(</span><span class="n">align</span><span class="p">(</span><span class="n">Alignment</span><span class="p">))</span> <span class="n">AlignedClass</span> <span class="p">{</span>
-<span class="nl">private:</span>
-  <span class="n">T</span> <span class="n">myData</span><span class="p">;</span>
-<span class="p">};</span>  <span class="c1">// 'AlignedClass' : invalid template argument for 'Alignment', expected compile-time constant expression</span>
-</code></pre></div>    </div>
-    <p>We can, of course, work around this issue in the compiler with some template magic:
-```cpp
-template<std::size_t A=""> struct aligned;
-template&lt;&gt; struct __declspec(align((1)) aligned&lt;1&gt; { };
-template&lt;&gt; struct __declspec(align((2)) aligned&lt;2&gt; { };
-template&lt;&gt; struct __declspec(align((4)) aligned&lt;4&gt; { };
-template&lt;&gt; struct __declspec(align((8)) aligned&lt;8&gt; { };
-template&lt;&gt; struct __declspec(align((16)) aligned&lt;16&gt; { };
-template&lt;&gt; struct __declspec(align((32)) aligned&lt;32&gt; { };
-template&lt;&gt; struct __declspec(align((64)) aligned&lt;64&gt; { };
-template&lt;&gt; struct __declspec(align((128)) aligned&lt;128&gt; { };</std::size_t></p>
-  </li>
+The last requirement, in particular, can create some difficulties when trying to use alignment with Visual Studio versions prior to 2017 update 5, which did not correctly implement the 2 phase template lookup required by the C++ standard when parsing template class. If we templatise a class on an alignment value, we create a situation where the compiler requires knowledge of a dependent type, the template alignment parameter, but does not yet have knowledge of this type. This unsurprisingly results in a compilation error:</li>
 </ul>
 
-<p>template<class T="">
-class AlignedClass : aligned&lt;32&gt; {
-private:
-    T myData; 
-};</class></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>But wouldn't this be nice if this just worked?
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">__declspec</span><span class="p">(</span><span class="n">align</span><span class="p">(</span><span class="n">Alignment</span><span class="p">))</span> <span class="n">AlignedClass</span> <span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="n">T</span> <span class="n">myData</span><span class="p">;</span>
+<span class="p">};</span>  <span class="c1">// 'AlignedClass' : invalid template argument for 'Alignment', expected compile-time constant expression</span>
+</code></pre></div></div>
 
-## Alignment of dynamically allocated memory
-This brings us to the next problem, heap-allocated memory. The extensions we have just looked at apply to structures and classes the compiler has control of, namely those declared global, statically or locally on the stack. If however, we need to allocate storage for an aligned type at run-time then the compiler has no control on this:
+<p>We can, of course, work around this issue in the compiler with some template magic:</p>
 
-```cpp
-struct __declspec(align((16))) float4 {
-    float f[4];
-};
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">template</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">A</span><span class="o">&gt;</span> <span class="k">struct</span> <span class="n">aligned</span><span class="p">;</span>
+<span class="k">template</span><span class="o">&lt;&gt;</span> <span class="k">struct</span> <span class="kr">__declspec</span><span class="p">(</span><span class="n">align</span><span class="p">((</span><span class="mi">1</span><span class="p">))</span> <span class="n">aligned</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">};</span>
+<span class="k">template</span><span class="o">&lt;&gt;</span> <span class="k">struct</span> <span class="kr">__declspec</span><span class="p">(</span><span class="n">align</span><span class="p">((</span><span class="mi">2</span><span class="p">))</span> <span class="n">aligned</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">};</span>
+<span class="k">template</span><span class="o">&lt;&gt;</span> <span class="k">struct</span> <span class="kr">__declspec</span><span class="p">(</span><span class="n">align</span><span class="p">((</span><span class="mi">4</span><span class="p">))</span> <span class="n">aligned</span><span class="o">&lt;</span><span class="mi">4</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">};</span>
+<span class="k">template</span><span class="o">&lt;&gt;</span> <span class="k">struct</span> <span class="kr">__declspec</span><span class="p">(</span><span class="n">align</span><span class="p">((</span><span class="mi">8</span><span class="p">))</span> <span class="n">aligned</span><span class="o">&lt;</span><span class="mi">8</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">};</span>
+<span class="k">template</span><span class="o">&lt;&gt;</span> <span class="k">struct</span> <span class="kr">__declspec</span><span class="p">(</span><span class="n">align</span><span class="p">((</span><span class="mi">16</span><span class="p">))</span> <span class="n">aligned</span><span class="o">&lt;</span><span class="mi">16</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">};</span>
+<span class="k">template</span><span class="o">&lt;&gt;</span> <span class="k">struct</span> <span class="kr">__declspec</span><span class="p">(</span><span class="n">align</span><span class="p">((</span><span class="mi">32</span><span class="p">))</span> <span class="n">aligned</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">};</span>
+<span class="k">template</span><span class="o">&lt;&gt;</span> <span class="k">struct</span> <span class="kr">__declspec</span><span class="p">(</span><span class="n">align</span><span class="p">((</span><span class="mi">64</span><span class="p">))</span> <span class="n">aligned</span><span class="o">&lt;</span><span class="mi">64</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">};</span>
+<span class="k">template</span><span class="o">&lt;&gt;</span> <span class="k">struct</span> <span class="kr">__declspec</span><span class="p">(</span><span class="n">align</span><span class="p">((</span><span class="mi">128</span><span class="p">))</span> <span class="n">aligned</span><span class="o">&lt;</span><span class="mi">128</span><span class="o">&gt;</span> <span class="p">{</span> <span class="p">};</span>
 
-float4 *pData = new float4[1000];
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">AlignedClass</span> <span class="o">:</span> <span class="n">aligned</span><span class="o">&lt;</span><span class="mi">32</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="n">T</span> <span class="n">myData</span><span class="p">;</span> 
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>But wouldn’t this be nice if this just worked?</p>
+
+<h2 id="alignment-of-dynamically-allocated-memory">Alignment of dynamically allocated memory</h2>
+<p>This brings us to the next problem, heap-allocated memory. The extensions we have just looked at apply to structures and classes the compiler has control of, namely those declared global, statically or locally on the stack. If however, we need to allocate storage for an aligned type at run-time then the compiler has no control on this:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="kr">__declspec</span><span class="p">(</span><span class="n">align</span><span class="p">((</span><span class="mi">16</span><span class="p">)))</span> <span class="n">float4</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">f</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="n">float4</span> <span class="o">*</span><span class="n">pData</span> <span class="o">=</span> <span class="k">new</span> <span class="n">float4</span><span class="p">[</span><span class="mi">1000</span><span class="p">];</span>
 </code></pre></div></div>
 <p>In the above example not only is an implementation of C++ not required to allocate properly aligned memory for the array, for practical purposes, it is very nearly required to do the allocation incorrectly [2]. Looking at how compilers implement vector deleting destructors we can see that they are required to insert the size of a dynamically allocated array into the beginning of the allocated block of memory so that the array delete knows how many elements in an array must have their destructors called. The upshot of this is array allocations are offset by the size of size_t.</p>
 
@@ -509,6 +688,86 @@ any type it must respect the alignment requirements of any member types it owns.
 <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p1007r0.pdf">[4] Timur Doumler &amp; Chandler Carruth. std::assume_aligned.  P1007R0</a><br />
 <a href="https://web.archive.org/web/20150212013524/http://research.scee.net/files/presentations/gcapaustralia09/Pitfalls_of_Object_Oriented_Programming_GCAP_09.pdf">[5] Tony Albrecht. Pitfalls Of Object Oriented Programming. Sony Computer Entertainment Europe, Research &amp; Development Division</a></p>
 
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-07-19T00:00:00+01:00">July 19, 2018</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Alignment+In+C%2B%2B%20https%3A%2F%2Ftwon.github.io%2Fblog%2F2018%2F07%2F19%2Falignment-in-c%2B%2B" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftwon.github.io%2Fblog%2F2018%2F07%2F19%2Falignment-in-c%2B%2B" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Ftwon.github.io%2Fblog%2F2018%2F07%2F19%2Falignment-in-c%2B%2B" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/blog/2019/12/12/first-blog-post" class="pagination--pager" title="Antony Peacock’s Blog, Site Launches
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2019/12/12/first-blog-post" rel="permalink">Antony Peacock’s Blog, Site Launches
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Well. Finally got around to putting this old website together. Neat thing about it - powered by Jekyll and I can use Markdown to author my posts. It actually...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
 
     </div>
 
