@@ -31,6 +31,9 @@ repository               : "twon/twon.github.io" # GitHub username/repo-name e.g
 twitter_username: AntPeacock
 github_username:  twon
 timezone: Europe/London
+paginate: 5 # amount of posts to show
+paginate_path: /blog/page:num/
+include: ["_pages"]
 
 # Build settings
 markdown: kramdown
@@ -50,18 +53,31 @@ defaults:
       type: posts
     values:
       author_profile: true
+      share: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
 
-
-author_profile: true
 author:
   name     : "Antony Peacock"
   avatar   : "/assets/images/bio-photo.jpg"
-  bio      : "My awesome biography constrained to a sentence or two goes here."
+  bio      : "Musing on software development, focused primarily on high performance computing and C++"
   location : "London, UK" 
   links:
-    - label: "Made Mistakes"
-      icon: "fas fa-fw fa-link"
-      url: "https://mademistakes.com"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:ant.peacock@gmail.com"
+    - label: "Stack Overflow"
+      icon: "fab fa-fw fa-stack-overflow"
+      url: "https://stackoverflow.com/users/4764531/antony-peacock"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/antpeacock"
