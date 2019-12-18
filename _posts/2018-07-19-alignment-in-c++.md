@@ -1,6 +1,7 @@
 ---
 toc: true
-layout: default
+layout: single
+classes: wide
 ---
 # What is alignment and why should I care?
 
@@ -38,6 +39,7 @@ struct Y
     float pad_f[1]; // Compiler generated padding
 };
 ```
+
 This example makes visible what is going on behind the scenes of a compiler to ensure alignment requirements are met. Because a 64-bit integer must be aligned to 8 bytes the compiler has to insert 7 bytes of padding after data member a and b. Similar padding is needed elsewhere to meet the specific alignment requirements of each data member. One point of interest in the insertion of pad_f by the compiler, while this might initially not appear to be needed for single instances of the class it becomes apparent that this must be inserted in order for the compiler to ensure that for an array of type Y, each instance of the Y struct is correctly aligned to meet the requirements of its internal data members. In particular without pad_f then data member b in the second element of an array would be 4 byte aligned, not 8-byte aligned. Of course, it's possible to ensure this padding is not necessary and that the resulting data structure is 24-bytes in length, however, to do so we must take care to manually align each data member as such:
 
 ```cpp
@@ -92,6 +94,7 @@ Microsoft Visual Studio and the Intel C++ Compiler for Windows support the synta
 - The number must be less than or equal to 128.
 - The number must be known at compile time.
 The last requirement, in particular, can create some difficulties when trying to use alignment with Visual Studio versions prior to 2017 update 5, which did not correctly implement the 2 phase template lookup required by the C++ standard when parsing template class. If we templatise a class on an alignment value, we create a situation where the compiler requires knowledge of a dependent type, the template alignment parameter, but does not yet have knowledge of this type. This unsurprisingly results in a compilation error:
+
 ```cpp
 template <class T>
 class __declspec(align(Alignment)) AlignedClass {
@@ -99,7 +102,9 @@ private:
     T myData;
 };  // 'AlignedClass' : invalid template argument for 'Alignment', expected compile-time constant expression
 ```
+
 We can, of course, work around this issue in the compiler with some template magic:
+
 ```cpp
 template<std::size_t A> struct aligned;
 template<> struct __declspec(align((1)) aligned<1> { };
@@ -117,6 +122,7 @@ private:
     T myData; 
 };
 ```
+
 But wouldn't this be nice if this just worked?
 
 ## Alignment of dynamically allocated memory
