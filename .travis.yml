@@ -4,6 +4,10 @@ cache: bundler
 rvm:
 - 2.4.2
 
+branches:
+  except:
+    - master
+
 install:
   # Install Jekyll and dependencies
   - bundle install
