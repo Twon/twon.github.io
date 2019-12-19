@@ -3,7 +3,7 @@
 [![license][badge.license]][license]
 [![issues][badge.issues]][issues]
 
-[badge.travis]: https://img.shields.io/travis/twon/twon.github.io/master.svg?logo=travis
+[badge.travis]: https://img.shields.io/travis/twon/twon.github.io/source.svg?logo=travis
 [badge.language]: https://img.shields.io/badge/language-Ruby-yellow.svg
 [badge.license]: https://img.shields.io/badge/license-MIT-blue.svg
 [badge.issues]: https://img.shields.io/github/issues/twon/twon.github.io.svg
