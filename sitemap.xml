@@ -331,7 +331,7 @@
     
     
     <url>
-        <loc>https://twon.github.io/</loc>
+        <loc>https://twon.github.io/home/</loc>
     </url>
     
     
@@ -380,6 +380,14 @@
     
     <url>
         <loc>https://twon.github.io/assets/js/lunr/lunr-store.js</loc>
+    </url>
+    
+    
+    
+    
+    
+    <url>
+        <loc>https://twon.github.io/</loc>
     </url>
     
     
