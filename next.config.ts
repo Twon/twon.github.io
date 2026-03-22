@@ -1,11 +1,12 @@
 import createMDX from '@next/mdx';
+import type { NextConfig } from 'next';
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   output: 'export',
-  // Make sure to ignore ESLint/TS errors during export if needed, 
-  // but better to fix them.
+  images: {
+    unoptimized: true,
+  },
 };
 
 const withMDX = createMDX({
